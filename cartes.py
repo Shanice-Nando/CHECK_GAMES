@@ -2,12 +2,12 @@ import random
 
 class card :
     #definition d'une carte
-    def __init__(self,val,form,color,penality,special_new_card):
+    def __init__(self,val,form,color,penality):
         self.value = val
         self.form = form
         self.colors= color
         self.penalitys=penality
-        self.special_new_card= special_new_card
+
 
     def name_card (self):
         return f"{self.value}  de  {self.form}" 
@@ -29,14 +29,13 @@ class cards:
            for val in values:
                  Color=None
                  penality=0
-                 special_new_card= None
                  if val =="7":
                      penality=2
                  elif val=="Joker":
                      penality=4   
                      Color=["Red","Black"]
                        
-                 self.cards.append(card(val,form,Color,penality,special_new_card))
+                 self.cards.append(card(val,form,Color,penality))
     def Mix (self):
         random.shuffle(self.cards)
     def Display (self):

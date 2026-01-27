@@ -1,5 +1,7 @@
 from cartes import *
 
+  ########### creation de la classe joueur ##########
+
 class Player():
     def __init__(self, namePlayer, listCardsPlayer):
         self.namePlayer = namePlayer
