@@ -5,12 +5,12 @@ player1 = Player("", [])
 player2 = Player("", [])
 
 try:
-    player1.namePlayer = str(input("Entrer le pseudo du joueur 1:"))
-    player2.namePlayer = str(input("Entrer le pseudo du joueur 2:"))
+    player1.namePlayer = str(input("Enter the player's Username 1:"))
+    player2.namePlayer = str(input("Enter the player's Username 2:"))
 except:
-    print("Une erreur est survenue")
+    print("An error has occurred")
 
-print(f"DEBUT DE LA PARTIE: {player1.namePlayer} vs {player2.namePlayer}")
+print(f"START OF THE GAME: {player1.namePlayer} vs {player2.namePlayer}")
 
 Action.Mix()
 centerCards = []
