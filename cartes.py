@@ -15,10 +15,10 @@ class cards:
     def __init__(self):
        values=[str(v) for v in range(2,11)] + ["Valet","Dame","Roi","As","Joker"]
        forms={
-          "Bs":"Biscuit",
-          "Mn": "Macabo-Noir",
-          "Cr": "Coeur-Rouge",
-          "Ar": "Arachide"
+          "Cs":"Cookies",
+          "Bc": "Black-Cocoyam",
+          "Rh": "Red-Heart",
+          "Ps": "Peanuts"
        }
        
        
@@ -45,3 +45,4 @@ Action=None
 Action=cards()
 Action.Mix()
 Action.Display()
+
