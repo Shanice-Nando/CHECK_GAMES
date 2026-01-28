@@ -14,5 +14,5 @@ class Player():
 
     def drawCards(self, number):
         for i in range(0, number):
-            self.listCardsPlayer.append(Action.cards[0])
-            Action.cards.pop(0)
+            self.listCardsPlayer.append(Action.Cards[0])
+            Action.Cards.pop(0)
