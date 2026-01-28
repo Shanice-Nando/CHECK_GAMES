@@ -18,7 +18,7 @@ centerCards = []
 player1.drawCards(4)
 player2.drawCards(4)
 
-centerCards.append(Action.cards[0])
-Action.cards.pop(0)
+centerCards.append(Action.Cards[0])
+Action.Cards.pop(0)
 
 
