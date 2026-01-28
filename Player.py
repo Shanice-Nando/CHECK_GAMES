@@ -10,7 +10,7 @@ class Player():
 
     def playACard(self, index):
         self.listCardsPlayer.pop(index)
-        print(f"le joueur a joué {self.listCardsPlayer[index].name_card()}")
+        print(f"The player played {self.listCardsPlayer[index].name_card()}")
 
     def drawCards(self, number):
         for i in range(0, number):
