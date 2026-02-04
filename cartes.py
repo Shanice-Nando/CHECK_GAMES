@@ -15,10 +15,10 @@ class Cards:
     def __init__(self):
        values=[str(v) for v in range(2,11)] + ["Valet","Dame","King","As"]
        forms={
-          "Cs":"Cookies",
-          "Bc": "Black-Cocoyam",
-          "Rh": "Red-Heart",
-          "Ps": "Peanuts"
+          "Bs":"Biscuits",
+          "Mn": "Macabo-Noir",
+          "Cr": "Coeur-Rouge",
+          "As": "Arachides"
        }
        self.Cards=[]
        for form in forms.values():
@@ -39,12 +39,10 @@ class Cards:
            
     def Mix (self):
         random.shuffle(self.Cards)
-    def Display (self):
-       for card in self.Cards:
-            print(card.name_card())
+    
 Action=None
 Action=Cards()
 Action.Mix()
-Action.Display()
 
 print(f"\nCards from the deck : {len(Action.Cards)}")
+
