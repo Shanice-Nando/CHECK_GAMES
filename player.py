@@ -1,5 +1,5 @@
-from cartes import *
-from main import *
+from cartes import Card,Action
+
 
   ########### creation de la classe joueur ##########
 
@@ -10,7 +10,6 @@ class Player():
         self.listCardsPlayer = []
 
     def playACard(self, index):
-        centerCards.append(self.listCardsPlayer[index])
         print(f"The player played {self.listCardsPlayer[index].name_card()}")
         self.listCardsPlayer.pop(index)
 

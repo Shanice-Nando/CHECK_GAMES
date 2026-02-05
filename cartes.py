@@ -10,7 +10,7 @@ class Card :
     def name_card (self):
         if self.form == "Joker":
             return self.value
-        return f"{self.value}  of  {self.form}" 
+        return f"{self.value}  {self.form}"
 class Cards:
     def __init__(self):
        values=[str(v) for v in range(2,11)] + ["Valet","Dame","King","As"]
@@ -28,9 +28,10 @@ class Cards:
                  
                  if val =="7":
                      penality=2
-                 elif val=="Joker":
-                     penality=4 
-                     Color=["Red","Black"]
+                 if form == "Biscuits" or form == "Coeur-Rouge":
+                     Color = "Red"
+                 if form == "Macabo-Noir" or form == "Arachides":
+                     Color = "Black"
                        
                  self.Cards.append(Card(val,form,Color,penality))
 
@@ -45,4 +46,5 @@ Action=Cards()
 Action.Mix()
 
 print(f"\nCards from the deck : {len(Action.Cards)}")
+
 
