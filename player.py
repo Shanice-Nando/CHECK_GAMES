@@ -1,6 +1,7 @@
 from cartes import Card,Action
 
 
+
   ########### creation de la classe joueur ##########
 
 class Player():
@@ -17,6 +18,7 @@ class Player():
 
     def drawCards(self, number):
         for i in range(0, number):
-            self.listCardsPlayer.append(Action.Cards[0])
-            Action.Cards.pop(0)
+                self.listCardsPlayer.append(Action.Cards[0])
+                Action.Cards.pop(0)
         print(f"{self.namePlayer} a tiré {number} carte(s)")
+

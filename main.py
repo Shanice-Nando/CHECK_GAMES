@@ -1,6 +1,8 @@
 from cartes import Card,Action
 from player import Player
 
+
+
 player1 = Player("", [])
 player2 = Player("", [])
 
@@ -16,6 +18,7 @@ def getName():
 getName()
 print(f"START OF THE GAME: {player1.namePlayer} vs {player2.namePlayer}")
 
+
 Action.Mix()
 centerCards = []
 
@@ -28,6 +31,8 @@ Action.Cards.pop(0)
 print(f"la carte du centre est:{centerCards[0].name_card()}")
 
 isPartyFinish = False
+isDrawed = False
+totalPenality = 0
 
 while isPartyFinish == False:
 
@@ -38,19 +43,50 @@ while isPartyFinish == False:
 
 
     for joueur in listPlayer:
-        listCardpossibletoPlay = []
-        for carte in joueur.listCardsPlayer:
-            if carte.value == centerCards[-1].value or carte.form == centerCards[-1].form:
-                listCardpossibletoPlay.append(carte)
-            elif carte.form == "Joker" and carte.colors == centerCards[-1].colors:
-                listCardpossibletoPlay.append(carte)
-            elif centerCards[-1].form == "Joker" and carte.colors == centerCards[-1].colors:
-                listCardpossibletoPlay.append(carte)
 
+        listCardpossibletoPlay = []
+
+        for carte in joueur.listCardsPlayer:
+
+            if int(centerCards[-1].penalitys) == 0:
+                if carte.value == centerCards[-1].value or carte.form == centerCards[-1].form:
+                        listCardpossibletoPlay.append(carte)
+                elif carte.form == "Joker" and carte.colors == centerCards[-1].colors:
+                    listCardpossibletoPlay.append(carte)
+                elif centerCards[-1].form == "Joker" and carte.colors == centerCards[-1].colors:
+                        listCardpossibletoPlay.append(carte)
+
+            else:
+                if isDrawed == True:
+                    if carte.value == centerCards[-1].value or carte.form == centerCards[-1].form:
+                        listCardpossibletoPlay.append(carte)
+                    elif carte.form == "Joker" and carte.colors == centerCards[-1].colors:
+                        listCardpossibletoPlay.append(carte)
+                    elif centerCards[-1].form == "Joker" and carte.colors == centerCards[-1].colors:
+                        listCardpossibletoPlay.append(carte)
+
+                else:
+                    if carte.penalitys:
+                        listCardpossibletoPlay.append(carte)
+
+
+        isDrawed = False
 
         if len(listCardpossibletoPlay) == 0:
             print(f"{joueur.namePlayer} n'a pas de cartes possibles à jouer")
-            joueur.drawCards(1)
+            if totalPenality > 1:
+                if len(Action.Cards) > totalPenality:
+                    joueur.drawCards(totalPenality)
+                else:
+                    for a in range(0, len(centerCards) - 1):
+                        Action.Cards.append(centerCards[a])
+                    Action.Mix()
+                    for a in range(0, len(centerCards) - 1):
+                        centerCards.pop(0)
+            else:
+                joueur.drawCards(1)
+            isDrawed = True
+            totalPenality = 0
         else:
             print(f"{joueur.namePlayer}, c'est à toi de jouer.Fais ton choix parmis les cartes suivantes:")
             for n in range(0,len(listCardpossibletoPlay)):
@@ -73,9 +109,22 @@ while isPartyFinish == False:
             if choice < len(listCardpossibletoPlay):
                 centerCards.append(joueur.listCardsPlayer[joueur.listCardsPlayer.index(listCardpossibletoPlay[choice])])
                 joueur.playACard(joueur.listCardsPlayer.index(listCardpossibletoPlay[choice]))
+                totalPenality += int(listCardpossibletoPlay[choice].penalitys)
 
             else:
-                joueur.drawCards(1)
+                if totalPenality > 1:
+                    if len(Action.Cards) > totalPenality:
+                        joueur.drawCards(totalPenality)
+                    else:
+                        for a in range(0, len(centerCards) - 1):
+                            Action.Cards.append(centerCards[a])
+                        Action.Mix()
+                        for a in range(0, len(centerCards) - 1):
+                            centerCards.pop(0)
+                else:
+                    joueur.drawCards(1)
+                isDrawed = True
+                totalPenality = 0
         print(f"la carte du centre est:{centerCards[-1].name_card()}")
 
         if len(Action.Cards) < 1:
@@ -84,14 +133,17 @@ while isPartyFinish == False:
             elif len(centerCards) > 1:
                 for a in range(0, len(centerCards) - 1):
                     Action.Cards.append(centerCards[a])
-                    centerCards.pop(a)
                 Action.Mix()
+                for a in range(0, len(centerCards) - 1):
+                    centerCards.pop(0)
+
 
         if len(player1.listCardsPlayer) == 0 or len(player2.listCardsPlayer) == 0:
             isPartyFinish = True
             for player in listPlayer:
                 if len(player.listCardsPlayer) == 0:
                     print(f"END OF THE GAME. Winner: {player.namePlayer}")
+
             break
 
 
